@@ -1,0 +1,97 @@
+<html>
+  <head>
+    <title>
+      Page creation
+    </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="bootsrap/css/bootstrap.css"/>
+    <script src="bootsrap/js/bootstrap.bundle.js"></script>
+  </head>
+  <body>
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg bg-body-tertiary border-bottom border-2 border-dark">
+  <div class="container-fluid d-flex">
+    <a class="navbar-brand me-4 pe-4" href="#">Chimax</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item px-2">
+          <a class="nav-link" aria-current="page" href="#">Accueil</a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link" href="#">Catalogue</a>
+        </li>
+        <li class="nav-item px-2">
+          <a class="nav-link" href="#">Notre mission</a>
+        </li>
+      </ul>
+      <form class="d-flex me-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Rechercher..." aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Rechercher</button>
+      </form>
+      <img src="avatar.png" class="" style="max-width: 50px; max-height: 50px;" />
+    </div>
+  </div>
+</nav>
+<!--Fin NavBar-->
+
+    <form action="index.html" id="CreationProduit">
+    <div class="container-fluid mt-5">
+      <div class="row">
+        <div class="col-sm-5 bg-light text-center">
+          <h2> Image du produit :</h2>
+          <!-- To do :Remplacer par l'image associer au produit choisis
+                    Si pas de photo relier, mettre l'image placeholder par defaut-->
+          <img src="img/placeholder.png" class="img-thumbnail mt-2 mr-auto" alt="PlaceholderImage" width="304" height="236">
+          <div class="form-group">
+            <label for="CreerImageProduit">Remplacer cette image :</label>
+            <input type="file" class="form-control-file" id="CreerImageProduit">
+          </div> 
+        </div>
+        <div class="col-sm-7 bg-blue justify-content-center">
+          
+            <div class="form-group">
+              <label for="Titre">Titre du produit:</label>
+              <input type="text" class="form-control" id="titre" required>
+            </div>
+            <div class="form-group">
+              <label for="Categorie-list">Categorie :</label>
+              <select class="form-control" id="Categorie-list" required>
+                <option>Categorie 1</option>
+                <option>Categorie 2</option>
+                <option>Categorie 3</option>
+                <option>Categorie 4</option>
+                <option>Categorie 5</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="prix">Prix du produit: $</label>
+              <input type="number" class="form-control" id="prix" required>
+            </div>
+            <div class="form-group">
+              <label for="Detail-produit">Detail du produit</label>
+              <textarea class="form-control" id="Detail-produit" required></textarea>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="container mt-5">
+      <div class="row mr-auto justify-content-center">
+        <div class="col-sm-3 text-center">
+          <a class="btn btn-danger btn-lg" href="index.html" role="button">Annuler</a>
+        </div>
+        <div class="col-sm-3">
+          <!-- Laisser blanc pour l'espacement entre les boutons-->
+        </div>
+        <div class="col-sm-3 text-center">
+          <button type="submit" class="btn btn-success btn-lg">Creer produit</button>
+        </div>
+      </div>
+    </div>
+    </form>
+    </body>
+    </html>
+</html>
