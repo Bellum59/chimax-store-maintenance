@@ -1,5 +1,4 @@
 @extends("layouts.app")
-
 @section("content")
 <div class="d-flex flex-column flex-md-row">
 	<div class="col d-flex flex-column p-4">
@@ -48,18 +47,27 @@
 		</div>
 	</div>
 </div>
-<div id="section commentaire" class="col-sm-12">
-	<h2> Espace commentaire :</h2>
-	<div class="commentaire col-sm-10 bg-light mx-auto">
-		<div class="row mx-auto justify-content-center">
-			<div class="col-sm-4 bg-light"> Nom et prenom </div>
-			<div class="col-sm-2 bg-light"></div>
-			<div class="col-sm-4 bg-light text-end"> date </div>
-		</div>
-		<div class="row">
-			<div class="col-sm-10 bg-light mx-auto text-center">
-				Contenue contenaire
-			</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-8">
+		  <div class="page-header">
+			<h1>Commentaires </h1>
+		  </div> 
+		   <div class="comments-list">
+			   <div class="media" style="border-bottom: 1px dotted #ccc;">
+				   <p class="float-right"><small>date</small></p>
+					<div class="media-body">
+						
+					  <h4 class="media-heading user_name">Nom commentaire</h4>
+					  Contenue
+					  
+					  <p><small><a href="">Supprimer</a></p>
+					</div>
+				  </div>
+		   </div>
+			
+			
+			
 		</div>
 	</div>
 </div>

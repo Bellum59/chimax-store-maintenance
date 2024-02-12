@@ -64,24 +64,31 @@
 	</div>
 </div>
 @endif
-<h2> Espace commentaire :</h2>
-<div id="section-commentaire" class="col-sm-12">
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		  <div class="page-header">
+			<h1>Commentaires </h1>
+		  </div> 
 @if($produit->commentaires)
 	@foreach($produit->commentaires as $commentaire)
-		<div class="commentaire col-sm-10 mx-auto t-5">
-			<div class="row mx-auto justify-content-center">
-				<div class="col-sm-4 bg-light"> {{$commentaire->auteur[0]["name"]}} </div>
-				<div class="col-sm-2 bg-light"></div>
-				<div class="col-sm-4 bg-light text-end"> {{$commentaire->date}} </div>
-			</div>
-			<div class="row">
-				<div class="col-sm-10 mx-auto text-center">
-					{{$commentaire->contenue}}
-				</div>
-			</div>
+	<div class="comments-list">
+		<div class="media" style="border-bottom: 1px dotted #ccc;">
+			<p class="float-right"><small>{{$commentaire->date}}</small></p>
+			 <div class="media-body">
+				 
+			   <h4 class="media-heading user_name">{{$commentaire->auteur[0]["name"]}}</h4>
+			   {{$commentaire->contenue}}
+			   @if(Auth::id() == $commentaire->idMembre)
+			   <p><small><a href="">Supprimer</a></p>
+			   @endif
+			 </div>
+		   </div>
 		</div>
 	@endforeach
 @endif
+		</div>
+	</div>
 </div>
 <div class="col-sm-10  mx-auto t-5 commentaireType" style="display:none" id="commentaireType">
 	<div class="row mx-auto justify-content-center">

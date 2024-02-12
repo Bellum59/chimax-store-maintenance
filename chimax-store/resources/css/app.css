@@ -6,6 +6,10 @@
     font-size:14px;
     font-weight: bold;
 }
-.comments-list .media{
+.media{
     border-bottom: 1px dotted #ccc;
+}
+
+.body{
+	background-color: black;
 }
