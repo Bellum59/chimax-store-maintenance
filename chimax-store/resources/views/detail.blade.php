@@ -68,39 +68,38 @@
 	<div class="row">
 		<div class="col-md-12">
 		  <div class="page-header">
-			<h1>Commentaires </h1>
-		  </div> 
+			<h1>Commentaires :</h1>
+		  </div>
+		  <div class="comments-list" id="section-commentaire">
 @if($produit->commentaires)
 	@foreach($produit->commentaires as $commentaire)
-	<div class="comments-list">
-		<div class="media" style="border-bottom: 1px dotted #ccc;">
+		<div class="media" style="border-bottom: 1px dotted #ccc;" id='{{$commentaire->id}}'>
 			<p class="float-right"><small>{{$commentaire->date}}</small></p>
 			 <div class="media-body">
 				 
 			   <h4 class="media-heading user_name">{{$commentaire->auteur[0]["name"]}}</h4>
 			   {{$commentaire->contenue}}
 			   @if(Auth::id() == $commentaire->idMembre)
-			   <p><small><a href="">Supprimer</a></p>
+			   <p><small><a href="#section-commentaire" onclick="supprimerCommentaire({{$commentaire->id}})">Supprimer</a></p>
 			   @endif
 			 </div>
 		   </div>
-		</div>
 	@endforeach
 @endif
+			</div>
 		</div>
 	</div>
 </div>
-<div class="col-sm-10  mx-auto t-5 commentaireType" style="display:none" id="commentaireType">
-	<div class="row mx-auto justify-content-center">
-		<div class="col-sm-4 bg-light" id="auteur"></div>
-		<div class="col-sm-2 bg-light"></div>
-		<div class="col-sm-4 bg-light text-end" id="date"> </div>
-	</div>
-	<div class="row">
-		<div class="col-sm-10 mx-auto text-center" id="commentaire-insert">
-		</div>
-	</div>
-</div>
+<div class="media" style="border-bottom: 1px dotted #ccc;display:none" id="commentaireType">
+	<p class="float-right" id="date"><small></small></p>
+	 <div class="media-body">
+		 
+	   <h4 class="media-heading user_name" id="auteur"></h4>
+	   <p id="commentaire-insert"></P>
+	   
+	   <p><small><a href="#" onclick="supprimerDernierCommentaire()">Supprimer</a></p>
+	 </div>
+   </div>
 <script>
 	function addPanier(){
 		console.log("Add panier qté = " + document.getElementById("quantite").value);
@@ -134,7 +133,7 @@
 		DataObjet["idMembre"] = membre;
 		DataObjet["idProduit"] = produit;
 		var Data = JSON.stringify(DataObjet);
-		fetch("https://chimax.store/index.php/ajoutCommentaire", {
+		fetch("https://devbel.xyz/index.php/ajoutCommentaire", {
 		method: 'post',
 		mode : 'cors',
 		body: Data,
@@ -182,6 +181,43 @@
 			ElementParent.insertBefore(CommentaireAjout,firstChild);
 		}
 		CommentaireAjout.style.display = 'block';
+	}
+
+	/*Fonction appeller pour supprimer un commentaire qui a etait ajouter par le php
+	prend l'id d'un commentaire en parametre dentrer, modifie l'affichage pour supprimer le html
+	apelle egalement une fonction du controlleur pour supprimer lentree dans la base de donnees*/
+	function supprimerCommentaire(idCommentaire){
+		var DataObjet = {};
+		DataObjet["id"] = idCommentaire;
+		var Data = JSON.stringify(DataObjet);
+		fetch(`https://devbel.xyz/index.php/suppressionCommentaire/${idCommentaire}`, { //FOnction suppression en php , re reouter par laraval a controller commentaire
+		method: 'post',
+		mode : 'cors',
+		body: Data,
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept' : 'application/json'
+		}
+		}).then((response) => {
+		return response.text();
+		}).then((res) => {
+			supprimerCommentaireVisuel(idCommentaire); //Si le php a reussis alors on supprime le visuel
+		}).catch((error) => {
+		console.log(error);
+		})
+	}
+
+	/*FOnction qui permet de supprimer lelement HTML/DOM dun commentaire sans actuliaser la page*/
+	function supprimerCommentaireVisuel(id){
+		//var toutLesCommentaire = document.getElementById("section-commentaire").innerHTML;
+		var listeCommentaire = document.getElementsByClassName("media");
+		var i = 0;
+		for(var com of listeCommentaire){
+			if (com.id == "24"){
+				com.remove();
+				break;
+			}
+		}
 	}
 </script>
 @endsection

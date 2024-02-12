@@ -22,4 +22,15 @@ class ControllerCommentaire extends Controller
         echo $Nom[0]["name"];
         exit();
     }
+
+    /*Recupere l'id d'un commentaire pour le supprimer de la
+    base de donnees*/
+    public function supprimerCommentaire(Request $request){
+        $received = file_get_contents('php://input');
+        $data = json_decode($received,true);
+        $id = $data["id"];
+        CommentaireDAO::supprimerCommentaireParId($id);
+        echo "succes";
+        exit();
+    }
 }

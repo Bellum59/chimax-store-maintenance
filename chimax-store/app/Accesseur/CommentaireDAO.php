@@ -60,7 +60,7 @@ class CommentaireDAO
         return $requete->execute();
     }
 
-    //Suppression d'un commentaire grace a son Id et non pas l"id d'un produit comme au dessus.
+    //Suppression d'un commentaire grace a son Id et non pas l'id d'un produit comme au dessus.
     public static function supprimerCommentaireParId($id){
         require_once "connexion.php";
         $bdd = new BaseDeDonnees();
