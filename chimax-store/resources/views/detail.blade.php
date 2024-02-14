@@ -152,8 +152,8 @@
 
 	});
 
-	function ajouterCommentaireVisuel(Nom,commentaire){
-		if(Nom == null){
+	function ajouterCommentaireVisuel(res,commentaire){
+		if(res == null){
 			return ;
 		}
 		var dateActuelle = new Date();
@@ -170,7 +170,9 @@
 
 		var Original = document.getElementById("commentaireType");
 		var CommentaireAjout = Original.cloneNode(true);
+		var Nom = res.split("")[0];
 		CommentaireAjout.querySelector('#auteur').innerText = Nom;
+		//To do ajouter id dans les commentaires
 		CommentaireAjout.querySelector('#date').innerText = dateFormatee;
 		CommentaireAjout.querySelector('#commentaire-insert').innerText = commentaire;
 		var ElementParent = document.getElementById('section-commentaire');

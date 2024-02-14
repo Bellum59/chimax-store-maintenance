@@ -19,7 +19,8 @@ class ControllerCommentaire extends Controller
         $date = strval($date);
         CommentaireDAO::AjoutCommentaire($date,$produit,$membre,$contenueCommentaire);
         $Nom = CommentaireDAO::recupererAuteur($membre);
-        echo $Nom[0]["name"];
+        $idCommentaire = CommentaireDAO::recupererDernierCommentairePoster($membre);
+        echo $Nom[0]["name"]+" "+$idCommentaire[0]["id"];
         exit();
     }
 

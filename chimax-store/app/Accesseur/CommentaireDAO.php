@@ -69,5 +69,18 @@ class CommentaireDAO
         $requete->bindParam(":id", $id);
         return $requete->execute();
     }
+
+    //Recupere L"id du dernier commentaire poster de facon a pouvoir l"initaliser
+    // dans lelement ajouter en js, ce qui permet sa suppression sans devoir
+    // actualiser la page pour que loption saffiche.
+    public static function recupererDernierCommentairePoster($idMembre){
+        require_once "connexion.php";
+        $bdd = new BaseDeDonnees();
+        $basededonnees = $bdd->pdo;
+        $requete = $basededonnees->prepare("SELECT id FROM commentaire WHERE idMembre=:id ORDER BY id DESC LIMIT 1"); //Ne recupere que le dernier
+        $requete->bindParam(":id", $idMembre);
+        $requete->execute();
+        return $requete->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
  
