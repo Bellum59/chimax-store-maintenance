@@ -104,3 +104,4 @@ Route::middleware('auth')->group(function() {
 
 Route::post('/ajoutCommentaire', [ControllerCommentaire::class, 'ajoutCommentaire']);
 Route::post('/suppressionCommentaire/{id}',[ControllerCommentaire::class, 'supprimerCommentaire']);
+Route::post('/actualisationCommentaire',[ControllerCommentaire::class, 'actualiserCommentaire']);

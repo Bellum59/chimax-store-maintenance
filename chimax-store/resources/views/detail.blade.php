@@ -63,6 +63,7 @@
 		</div>
 	</div>
 </div>
+<div class="text-center mt-4"><button type="button" class="btn btn-secondary mx-auto" onclick="actualiserCommentaire()"> Actualiser </button></div>
 @endif
 <div class="container">
 	<div class="row">
@@ -222,6 +223,61 @@
 				break;
 			}
 		}
+	}
+
+	function actualiserCommentaire(){
+		//On compte les commentaires
+		var listeCommentaire = document.getElementsByClassName("media");
+		var i = 0;
+		for(var com of listeCommentaire){
+			if (parseInt(com.id)){ //On ne compte que les commentaires avec une id
+				i++;
+				console.log(com.id);
+			}
+		}
+		console.log(i);
+		//ON efface les commentaires deja present
+		document.getElementById("section-commentaire").innerHTML = "";
+		var idProduit = document.getElementById("idProduit").value;
+		var DataObjet = {};
+		DataObjet["compteur"] = i;
+		DataObjet["idProduit"] = idProduit;
+		var Data = JSON.stringify(DataObjet);
+		fetch(`https://devbel.xyz/index.php/actualisationCommentaire`, { //FOnction actualiser en php php 
+		method: 'post',
+		mode : 'cors',
+		body: Data,
+		headers: {
+			'Content-Type': 'application/json',
+			'Accept' : 'application/json'
+		}
+		}).then((response) => {
+		return response.text();
+		}).then((res) => {
+			res = JSON.parse(res);
+			for(var commentaire of res){
+				console.log(commentaire);
+				var Original = document.getElementById("commentaireType");
+				var CommentaireAjout = Original.cloneNode(true);
+				CommentaireAjout.id = commentaire.id;
+				CommentaireAjout.querySelector('#auteur').innerText = commentaire.nom; 
+				//To do ajouter id dans les commentaires
+				CommentaireAjout.querySelector('#date').innerText = commentaire.date;
+				CommentaireAjout.querySelector('#commentaire-insert').innerText = commentaire.contenue;
+				CommentaireAjout.querySelector('#supression').setAttribute("onclick",`supprimerCommentaire(${commentaire.id})`);
+				var ElementParent = document.getElementById('section-commentaire');
+				if(ElementParent === null){
+					document.getElementById('section-commentaire').innerHTML = CommentaireAjout;
+				}else {
+					var firstChild = ElementParent.firstChild;
+					ElementParent.insertBefore(CommentaireAjout,firstChild);
+				}
+				CommentaireAjout.style.display = 'block';
+			}
+		}).catch((error) => {
+		console.log(error);
+		})
+
 	}
 </script>
 @endsection

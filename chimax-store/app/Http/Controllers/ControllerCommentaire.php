@@ -36,4 +36,23 @@ class ControllerCommentaire extends Controller
         echo "succes";
         exit();
     }
+
+    public function actualiserCommentaire(Request $request){
+        $received = file_get_contents('php://input');
+        $data = json_decode($received,true);
+        $compteurCommentaire = $data["compteur"];
+        $idProduit = $data["idProduit"];
+        $listeCommentaires = CommentaireDAO::RecupererCommentaires($idProduit);
+        if(count($listeCommentaires) == $compteurCommentaire){ //Si il ny a pas de nouveau commentaires
+            //echo "identique";
+            $listeCommentaires = (array)$listeCommentaires;
+            foreach($listeCommentaires as $com){
+                $auteur = CommentaireDAO::recupererAuteur($com->idMembre);
+                $com->nom = $auteur[0]["name"];
+            }
+            echo json_encode($listeCommentaires);
+        }else{
+            echo json_encode($listeCommentaires);
+        }
+    }
 }
