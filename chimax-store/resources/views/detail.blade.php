@@ -97,7 +97,7 @@
 	   <h4 class="media-heading user_name" id="auteur"></h4>
 	   <p id="commentaire-insert"></P>
 	   
-	   <p><small><a href="#" onclick="supprimerDernierCommentaire()">Supprimer</a></p>
+	   <p><small><a href="#section-commentaire" id="supression">Supprimer</a></p>
 	 </div>
    </div>
 <script>
@@ -124,7 +124,7 @@
 
 	document.getElementById("envoieCommentaire").addEventListener("click", function(event){
   		event.preventDefault();
-		ajouterCommentaireVisuel();
+		//ajouterCommentaireVisuel();
 		var contenueCommentaire = document.getElementById("contenueCommentaire").value;
 		var membre = document.getElementById("idMembre").value;
 		var produit = document.getElementById("idProduit").value;
@@ -156,6 +156,7 @@
 		if(res == null){
 			return ;
 		}
+		res = JSON.parse(res);
 		var dateActuelle = new Date();
 
 		var annee = dateActuelle.getFullYear();
@@ -170,11 +171,12 @@
 
 		var Original = document.getElementById("commentaireType");
 		var CommentaireAjout = Original.cloneNode(true);
-		var Nom = res.split("")[0];
-		CommentaireAjout.querySelector('#auteur').innerText = Nom;
+		CommentaireAjout.id = res.id;
+		CommentaireAjout.querySelector('#auteur').innerText = res.Nom;
 		//To do ajouter id dans les commentaires
 		CommentaireAjout.querySelector('#date').innerText = dateFormatee;
 		CommentaireAjout.querySelector('#commentaire-insert').innerText = commentaire;
+		CommentaireAjout.querySelector('#supression').setAttribute("onclick",`supprimerCommentaire(${res.id})`);
 		var ElementParent = document.getElementById('section-commentaire');
 		if(ElementParent === null){
 			document.getElementById('section-commentaire').innerHTML = CommentaireAjout;
@@ -215,7 +217,7 @@
 		var listeCommentaire = document.getElementsByClassName("media");
 		var i = 0;
 		for(var com of listeCommentaire){
-			if (com.id == "24"){
+			if (com.id == id){
 				com.remove();
 				break;
 			}

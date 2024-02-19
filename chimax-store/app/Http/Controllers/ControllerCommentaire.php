@@ -20,7 +20,9 @@ class ControllerCommentaire extends Controller
         CommentaireDAO::AjoutCommentaire($date,$produit,$membre,$contenueCommentaire);
         $Nom = CommentaireDAO::recupererAuteur($membre);
         $idCommentaire = CommentaireDAO::recupererDernierCommentairePoster($membre);
-        echo $Nom[0]["name"]+" "+$idCommentaire[0]["id"];
+        $response = array("Nom"=>$Nom[0]["name"],"id"=>$idCommentaire[0]["id"]);
+        //echo $Nom[0]["name"]." ".$idCommentaire[0]["id"];
+        echo json_encode($response);
         exit();
     }
 
