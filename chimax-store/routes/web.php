@@ -98,6 +98,9 @@ Route::middleware('auth')->group(function() {
 
 	// Route paiement
 	Route::post('/confirmationAchat', [ControllerProduit::class, 'passProduitInfo']);
+
+	//Route commentaire
+	Route::get('/compte/commentaire', [ControllerCommentaire::class, 'afficherHistorique']);
 });
 
 // Routes pour commentaire

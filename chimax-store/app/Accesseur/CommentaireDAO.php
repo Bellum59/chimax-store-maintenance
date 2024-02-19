@@ -82,5 +82,23 @@ class CommentaireDAO
         $requete->execute();
         return $requete->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
+    public static function recupererCommentaireParAuteur($idMembre){
+        require_once "connexion.php";
+        $bdd = new BaseDeDonnees();
+        $basededonnees = $bdd->pdo;
+        $requete = $basededonnees->prepare("SELECT * FROM commentaire WHERE idMembre=:id");
+        $requete->bindParam(":id", $idMembre);
+        $requete->execute();
+        $commentaires = $requete->fetchAll(PDO::FETCH_ASSOC);
+        $commentairesFiltres = array();
+        foreach($commentaires as $commentaire)
+        {
+            $commentairesFiltres[] = new commentaire($commentaire);
+        }
+
+        return $commentairesFiltres;
+    }
 }
  

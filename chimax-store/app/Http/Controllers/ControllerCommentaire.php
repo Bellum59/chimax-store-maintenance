@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Accesseur\CommentaireDAO;
+use Auth;
 
 class ControllerCommentaire extends Controller
 {
@@ -54,5 +55,14 @@ class ControllerCommentaire extends Controller
         }else{
             echo json_encode($listeCommentaires);
         }
+    }
+
+    public function afficherHistorique(){
+        $listeCommentaires = CommentaireDAO::recupererCommentaireParAuteur(Auth::id());
+        foreach($listeCommentaires as $com){
+            $auteur = CommentaireDAO::recupererAuteur($com->idMembre);
+            $com->nom = $auteur[0]["name"];
+        }
+        return view('listeCommentaire')->with('listeCommentaires', $listeCommentaires);
     }
 }

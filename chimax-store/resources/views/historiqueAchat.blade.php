@@ -14,6 +14,9 @@
 			<div class="border-bottom mb-2 px-4 py-2">
 				<a href="/index.php/password/change">Changer mon mot de passe</a>
 			</div>
+			<div class="border-bottom mb-2 px-4 py-2">
+				<a href="/index.php/compte/commentaire">Historique commentaire</a>
+			</div>
 		</div>
 		<div class="d-flex flex-column col-sm-10 justify-content-center text-center mt-4">
 		@if(count($arrayFacture) > 0)
@@ -39,7 +42,7 @@
 					<th>{{$facture->produit->nom}}</th>
 					<th>{{$facture->quantite}}</th>
 					<th>{{$facture->produit->prix}}</th>
-					<th>{{$facture->quantite * $facture->prix}}</th>
+					<th>{{$facture->quantite * $facture->produit->prix}}</th>
 				  </tr>
                 </table>
 			  </div>

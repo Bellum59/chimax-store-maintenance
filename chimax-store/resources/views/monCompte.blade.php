@@ -14,6 +14,9 @@
 			<div class="border-bottom mb-2 px-4 py-2">
 				<a href="/index.php/password/change">Changer mon mot de passe</a>
 			</div>
+			<div class="border-bottom mb-2 px-4 py-2">
+				<a href="/index.php/compte/commentaire">Historique commentaire</a>
+			</div>
 		</div>
 		<div>
 			<form action="#" method="post">
